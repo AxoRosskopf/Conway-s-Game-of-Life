@@ -1,0 +1,3 @@
+/home/axrskpf/Documents/Projects/Testing/build/CMakeFiles/Testing.dir
+/home/axrskpf/Documents/Projects/Testing/build/CMakeFiles/edit_cache.dir
+/home/axrskpf/Documents/Projects/Testing/build/CMakeFiles/rebuild_cache.dir
