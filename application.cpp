@@ -78,6 +78,14 @@ int cantAdy(vector<vector<Cell>>&t , int x, int y){
     return res;
 }
 
+void Application::clear(){
+    for(int i = 0; i < CANT_CELL_H; i++){
+        for(int j = 0; j < CANT_CELL_W; j++){
+            cells[i][j].dead();
+        }
+    }
+}
+
 void Application::loop()
 {
     bool keep_window_open = true;
@@ -120,24 +128,11 @@ void Application::loop()
             }
         }
 
+
         if(accumulatedTime >= updateInterval && !pause){
-            for(int i = 0; i < CANT_CELL_H; i++){
-                for(int j = 0; j < CANT_CELL_W; j++){
-                            int neighbors = cantAdy(cells, i, j);
-                            
-                            if (cells[i][j].isAlive()) {
-                                if (neighbors < 2 || neighbors > 3) {
-                                    cells[i][j].dead();
-                                }
-                            } else {
-                                if (neighbors == 3) {
-                                    cells[i][j].active();
-                                }
-                            }
-                        }
-                }
-            }
+            update();
             accumulatedTime = 0.0;
+        }
 
         
         draw();
@@ -146,8 +141,27 @@ void Application::loop()
 
 
 
-void Application::update(double delta_time)
+void Application::update()
 {
+    vector<vector<Cell>> newCells = cells;
+
+    for (int i = 0; i < CANT_CELL_H; i++) {
+        for (int j = 0; j < CANT_CELL_W; j++) {
+            int neighbors = cantAdy(cells, i, j);
+
+            if (cells[i][j].isAlive()) {
+                if (neighbors < 2 || neighbors > 3) {
+                    newCells[i][j].dead();
+                }
+            } else {
+                if (neighbors == 3) {
+                    newCells[i][j].active();
+                }
+            }
+        }
+    }
+
+    cells = newCells;
 
 }
 

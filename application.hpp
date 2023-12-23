@@ -13,8 +13,9 @@ public:
     Application();
     ~Application();
 
+    void clear();
     void loop();
-    void update(double delta_time);
+    void update();
     void draw();
 
 private:
